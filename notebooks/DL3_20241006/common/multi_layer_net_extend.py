@@ -21,12 +21,12 @@ class MultiLayerNetExtend:
         'sigmoid'나 'xavier'로 지정하면 'Xavier 초깃값'으로 설정
     weight_decay_lambda : 가중치 감소(L2 법칙)의 세기
     use_dropout : 드롭아웃 사용 여부
-    dropout_ration : 드롭아웃 비율
+    dropout_ratio : 드롭아웃 비율
     use_batchNorm : 배치 정규화 사용 여부
     """
     def __init__(self, input_size, hidden_size_list, output_size,
                  activation='relu', weight_init_std='relu', weight_decay_lambda=0, 
-                 use_dropout = False, dropout_ration = 0.5, use_batchnorm=False):
+                 use_dropout = False, dropout_ratio = 0.5, use_batchnorm=False):
         self.input_size = input_size
         self.output_size = output_size
         self.hidden_size_list = hidden_size_list
@@ -53,7 +53,7 @@ class MultiLayerNetExtend:
             self.layers['Activation_function' + str(idx)] = activation_layer[activation]()
             
             if self.use_dropout:
-                self.layers['Dropout' + str(idx)] = Dropout(dropout_ration)
+                self.layers['Dropout' + str(idx)] = Dropout(dropout_ratio)
 
         idx = self.hidden_layer_num + 1
         self.layers['Affine' + str(idx)] = Affine(self.params['W' + str(idx)], self.params['b' + str(idx)])
